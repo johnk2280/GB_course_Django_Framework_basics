@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def render_products(request):
+    return render(request, 'mainapp/products.html')
