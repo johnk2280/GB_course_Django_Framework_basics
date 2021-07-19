@@ -21,7 +21,7 @@ from my_geek_shop.views import render_index, render_contacts, render_prod_descri
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('mainapp.urls')),
-    path('', render_index),
-    path('contacts/', render_contacts),
-    path('prod_description/', render_prod_description),
+    path('', render_index, name='index'),
+    path('contacts/', render_contacts, name='contacts'),
+    path('prod_description/', render_prod_description, name='prod_description'),
 ]

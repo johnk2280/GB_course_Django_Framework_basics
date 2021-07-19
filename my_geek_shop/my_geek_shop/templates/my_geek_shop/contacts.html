@@ -1,22 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Contacts</title>
-    <link rel="stylesheet" href="/static/my_geek_shop/style.css">
+    <link rel="stylesheet" href="{%  static 'my_geek_shop/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="conteiner">
     <div class="header-contacts">
         <div class="header clearfix">
-            <a href="#" class="logo"><img src="/static/my_geek_shop/img/logo.svg" alt="logo"></a>
+            <a href="#" class="logo"><img src="{%  static 'my_geek_shop/img/logo.svg' %}" alt="logo"></a>
             <ul class="menu clearfix">
-                <li class="menu-list"><a href="/" class="menu-link menu-link-active">HOME</a></li>
+                <li class="menu-list"><a href="{% url 'index' %}" class="menu-link menu-link-active">HOME</a></li>
                 <li class="menu-list"><a href="/products" class="menu-link">PRODUCTS</a></li>
                 <li class="menu-list"><a href="" class="menu-link">HISTORY</a></li>
                 <li class="menu-list"><a href="" class="menu-link">SHOWROOM</a></li>
-                <li class="menu-list"><a href="" class="menu-link">CONTACT</a></li>
+                <li class="menu-list"><a href="#" class="menu-link">CONTACT</a></li>
                 <li class="menu-list menu-search"><a href="#" class="menu-search-link"><img src="/static/my_geek_shop/img/search.svg"
                                                                                             alt="search"></a></li>
             </ul>
