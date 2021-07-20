@@ -1,31 +1,15 @@
 {% extends "my_geek_shop/base.html" %}
-
 {% load static  %}
 
-{% block header %}
-<div class="header-contacts">
-    <div class="header clearfix">
-        <a href="#" class="logo"><img src="{%  static 'my_geek_shop/img/logo.svg' %}" alt="logo"></a>
-        <ul class="menu clearfix">
-            <li class="menu-list"><a href="{% url 'index' %}" class="menu-link menu-link-active">HOME</a></li>
-            <li class="menu-list"><a href="/products" class="menu-link">PRODUCTS</a></li>
-            <li class="menu-list"><a href="" class="menu-link">HISTORY</a></li>
-            <li class="menu-list"><a href="" class="menu-link">SHOWROOM</a></li>
-            <li class="menu-list"><a href="#" class="menu-link">CONTACT</a></li>
-            <li class="menu-list menu-search"><a href="#" class="menu-search-link"><img
-                    src="/static/my_geek_shop/img/search.svg"
-                    alt="search"></a></li>
-        </ul>
-    </div>
-    <h2 class="Contacts">Contact Us</h2>
-</div>
-{% endblock %}
+{% block title %}Контакты{% endblock %}
+
+{% block header_text %}Contact Us{% endblock %}
 
 {% block content %}
 <div class="main contacts-main">
     <div class="california">
         <ul class="california1">
-            <li><img src="/static/my_geek_shop/img/point.jpg" alt="point"></li>
+            <li><img src="{%  static 'my_geek_shop/img/point.jpg' %}" alt="point"></li>
             <li><h2 class="california-h2">California</h2></li>
             <li><p class="requisites">Phone:</p></li>
             <li><p class="text-requisites">1900 - 1234 -5678</p></li>
@@ -37,7 +21,7 @@
     </div>
     <div class="california">
         <ul class="california1">
-            <li><img src="/static/my_geek_shop/img/point.jpg" alt="point"></li>
+            <li><img src="{%  static 'my_geek_shop/img/point.jpg' %}" alt="point"></li>
             <li><h2 class="california-h2">California</h2></li>
             <li><p class="requisites">Phone:</p></li>
             <li><p class="text-requisites">1900 - 1234 -5678</p></li>
@@ -49,7 +33,7 @@
     </div>
     <div class="california">
         <ul class="california1">
-            <li><img src="/static/my_geek_shop/img/point.jpg" alt="point"></li>
+            <li><img src="{%  static 'my_geek_shop/img/point.jpg' %}" alt="point"></li>
             <li><h2 class="california-h2">California</h2></li>
             <li><p class="requisites">Phone:</p></li>
             <li><p class="text-requisites">1900 - 1234 -5678</p></li>

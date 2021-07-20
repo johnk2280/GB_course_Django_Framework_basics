@@ -1,21 +1,12 @@
 {% extends "my_geek_shop/base.html" %}
-
 {% load static  %}
+
+{% block title %}Главная{% endblock %}
 
 {% block header %}
 <div class="slider padding-site">
-    <div class="header clearfix">
-        <a href="#" class="logo"><img src="{%  static 'my_geek_shop/img/logo.svg' %}" alt="logo"></a>
-        <ul class="menu clearfix">
-            <li class="menu-list"><a href="" class="menu-link menu-link-active">HOME</a></li>
-            <li class="menu-list"><a href="/products" class="menu-link">PRODUCTS</a></li>
-            <li class="menu-list"><a href="" class="menu-link">HISTORY</a></li>
-            <li class="menu-list"><a href="" class="menu-link">SHOWROOM</a></li>
-            <li class="menu-list"><a href="{% url 'contacts' %}" class="menu-link">CONTACT</a></li>
-            <li class="menu-list menu-search"><a href="#" class="menu-search-link"><img
-                    src="{%  static 'my_geek_shop/img/search.svg' %}" alt="search"></a></li>
-        </ul>
-    </div>
+    {% include 'my_geek_shop/includes/inc_header_menu.html' %}
+
     <div class="slider-text">
         <p class="slider-trending">TRENDING {% now "Y" %}</p>
         <h2 class="slider-h2">Fishnet Chair</h2>
