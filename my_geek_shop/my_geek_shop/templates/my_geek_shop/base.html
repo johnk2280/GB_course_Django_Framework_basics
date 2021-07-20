@@ -1,10 +1,63 @@
+{% load static  %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main</title>
+    <link rel="stylesheet" href="{%  static 'my_geek_shop/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
 </head>
-<body>
 
+<body>
+<div class="conteiner">
+    {% block header %}
+    {% endblock%}
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="footer">
+        <div class="footer-up"></div>
+        <table class="table">
+            <tr>
+                <td class="ContactUs ContactUs1">Contact Us</td>
+                <td colspan=2 class="UsefulInformation UsefulInformation1">Useful Information</td>
+                <td class="LetsStayinTouch LetsStayinTouch1">Let’s Stay in Touch!</td>
+            </tr>
+            <tr>
+                <td rowspan=3 class="ContactUs">132A Bridge Road Richmond VIC Australia. <br> <br>Talk to us on 1300 132
+                    info@interior.com
+                </td>
+                <td class="footer-text"><a href="#">Sales terms</a></td>
+                <td class="footer-text"><a href="#">Architect accounts</a></td>
+                <td class="LetsStayinTouch">Subscribe to know about our latest news, products and special offers just
+                    for subscribers.
+                </td>
+            </tr>
+            <tr>
+
+                <td class="footer-text"><a href="#">Customer care</a></td>
+                <td class="footer-text"><a href="#">Careers</a></td>
+                <td class="LetsStayinTouch"><input class="mail" type="text" size="55" placeholder="your email address">
+                </td>
+            </tr>
+            <tr>
+
+                <td class="footer-text"><a href="#">Delivery</a></td>
+                <td class="footer-text"><a href="#">Exchanges and returns</a></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="footer-dawn">
+            <div class="Copyright"><p>&copy;Copyright - INTERIOR 2016. All Rights Reserved.</p>
+            </div>
+            <div class="social-links"><a href="#"><img src="{%  static 'my_geek_shop/img/social-links.webp' %}"
+                                                       alt="social-links"></a></div>
+            <div class="terms"><a href="#">Terms &amp Conditions / Privacy policy &amp Cookies</a></div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
