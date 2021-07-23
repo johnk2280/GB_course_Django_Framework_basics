@@ -8,9 +8,10 @@ def read_context_file():
 
 
 def render_products(request):
+    content = read_context_file()
     context = {
-        'title': read_context_file()['products']['title'],
-        'text': read_context_file()['products']['text'],
-        'menu_links': read_context_file()['products']['menu_links'],
+        'title': content['products']['title'],
+        'text': content['products']['text'],
+        'menu_links': content['products']['menu_links'],
     }
     return render(request, 'mainapp/products.html', context)
