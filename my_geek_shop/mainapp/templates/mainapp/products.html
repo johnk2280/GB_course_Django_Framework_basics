@@ -1,20 +1,18 @@
 {% extends "my_geek_shop/base.html" %}
 {% load static  %}
 
-{% block title %}Товары{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
-{% block header_text %}Our Products Range{% endblock %}
+{% block header_text %}{{ text|title }}{% endblock %}
 
 {% block content %}
 <div class="main-products">
     <ul class="menu-products-header">
-        <li class="menu-products-header-link"><a href="#">All</a></li>
-        <li class="menu-products-header-link"><a href="">HOME</a></li>
-        <li class="menu-products-header-link"><a href="#">OFFICE</a></li>
-        <li class="menu-products-header-link"><a href="">FURNITURE</a></li>
-        <li class="menu-products-header-link"><a href="">MODERN</a></li>
-        <li class="menu-products-header-link"><a href="">CLASSIC</a></li>
+        {% for link in menu_links %}
+            <li class="menu-products-header-link"><a href="{{ link.href }}">{{ link.text }}</a></li>
+        {% endfor %}
     </ul>
+
     <div class="block-products">
         <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-11.jpg" alt=""></a>
         </div>

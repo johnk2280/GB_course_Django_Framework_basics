@@ -1,0 +1,58 @@
+{
+  "products": {
+    "title": "Каталог",
+    "text": "our products range",
+    "menu_links": [
+      {
+        "href": "",
+        "text": "ALL"
+      },
+      {
+        "href": "",
+        "text": "HOME"
+      },
+      {
+        "href": "",
+        "text": "OFFICE"
+      },
+      {
+        "href": "",
+        "text": "FURNITURE"
+      },
+      {
+        "href": "",
+        "text": "MODERN"
+      },
+      {
+        "href": "",
+        "text": "CLASSIC"
+      }
+    ]
+  },
+  "header_menu_links": [
+    {
+      "href": "{% url 'index' %}",
+      "text": "HOME"
+    },
+    {
+      "href": "/products",
+      "text": "PRODUCTS"
+    },
+    {
+      "href": "",
+      "text": "HISTORY"
+    },
+    {
+      "href": "",
+      "text": "SHOWROOM"
+    },
+    {
+      "href": "",
+      "text": "CONTACT"
+    },
+    {
+      "href": "",
+      "text": "FURNITURE"
+    }
+  ]
+}
