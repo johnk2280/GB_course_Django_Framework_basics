@@ -14,6 +14,13 @@ class ProductCategory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -38,4 +45,20 @@ class Product(models.Model):
         verbose_name='описание',
         blank=True,
     )
-    price = models.DecimalField
+    price = models.DecimalField(
+        verbose_name='стоимость',
+        max_digits=8,
+        decimal_places=2,
+        default=0,
+    )
+    quantity = models.PositiveIntegerField(
+        verbose_name='остаток на складе',
+        default=0,
+    )
+
+    def __str__(self):
+        return f'{self.name} - {self.pk}'
+
+    class Meta:
+        verbose_name = 'product'
+        verbose_name_plural = 'products'
