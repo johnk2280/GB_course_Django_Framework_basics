@@ -29,6 +29,36 @@
       }
     ]
   },
+  "prod_description": {
+    "title": "Описание товара",
+    "text": "",
+    "menu_links": [
+      {
+        "href": "",
+        "text": "ALL"
+      },
+      {
+        "href": "",
+        "text": "HOME"
+      },
+      {
+        "href": "",
+        "text": "OFFICE"
+      },
+      {
+        "href": "",
+        "text": "FURNITURE"
+      },
+      {
+        "href": "",
+        "text": "MODERN"
+      },
+      {
+        "href": "",
+        "text": "CLASSIC"
+      }
+    ]
+  },
   "header_menu_links": [
     {
       "href": "{% url 'index' %}",
@@ -54,5 +84,10 @@
       "href": "",
       "text": "FURNITURE"
     }
-  ]
+  ],
+  "contacts": {
+    "title": "Контакты",
+    "text": "Contact Us",
+    "menu_links": []
+  }
 }

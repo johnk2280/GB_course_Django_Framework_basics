@@ -7,11 +7,15 @@ def read_context_file():
         return json.load(f)
 
 
-def render_products(request):
-    content = read_context_file()
-    context = {
-        'title': content['products']['title'],
-        'text': content['products']['text'],
-        'menu_links': content['products']['menu_links'],
+def get_page_data(page_name):
+    data = read_context_file()
+    return {
+        'title': data[page_name]['title'],
+        'text': data[page_name]['text'],
+        'menu_links': data[page_name]['menu_links'],
     }
+
+
+def render_products(request):
+    context = get_page_data('products')
     return render(request, 'mainapp/products.html', context)

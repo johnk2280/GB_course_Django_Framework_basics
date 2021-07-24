@@ -1,7 +1,7 @@
 {% extends "my_geek_shop/base.html" %}
 {% load static  %}
 
-{% block title %}Описание товара{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block header %}
 <div class="header-prod-description">
@@ -12,12 +12,9 @@
 {% block content %}
 <div class="menu-products-field">
     <ul class="menu-products-block">
-        <li class="menu-products-header-link"><a href="#">All</a></li>
-        <li class="menu-products-header-link"><a href="">HOME</a></li>
-        <li class="menu-products-header-link"><a href="#">OFFICE</a></li>
-        <li class="menu-products-header-link"><a href="">FURNITURE</a></li>
-        <li class="menu-products-header-link"><a href="">MODERN</a></li>
-        <li class="menu-products-header-link"><a href="">CLASSIC</a></li>
+        {% for link in menu_links %}
+            <li class="menu-products-header-link"><a href="{{ lint.href }}">{{ link.text }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 
