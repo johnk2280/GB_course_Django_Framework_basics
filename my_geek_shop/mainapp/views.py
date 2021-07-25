@@ -19,3 +19,7 @@ def get_page_data(page_name):
 def render_products(request):
     context = get_page_data('products')
     return render(request, 'mainapp/products.html', context)
+
+
+def get_category(request, pk=None):
+    print(pk)
