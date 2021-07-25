@@ -63,3 +63,24 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'product'
         verbose_name_plural = 'products'
+
+
+class ProductsFile(models.Model):
+    name = models.CharField(
+        verbose_name='имя',
+        max_length=64,
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+    file = models.FileField(
+        upload_to='product_files',
+    )
+    is_uploaded = models.BooleanField(
+        verbose_name='данные загружены',
+        default=False,
+        db_index=True,
+    )
+
+    def __str__(self):
+        return self.file
