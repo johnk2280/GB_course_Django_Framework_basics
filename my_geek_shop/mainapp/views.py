@@ -49,6 +49,7 @@ def add_products():
     for file in uploaded_files:
         products = get_products_from_file(file['file'])
         for product in products:
+            # TODO: в модели Product реализовать перегрузку __init__
             added_product = Product(
                 name=product['name'],
                 short_description=product['short_description'],
