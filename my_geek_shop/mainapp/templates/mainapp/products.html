@@ -7,10 +7,9 @@
 
 {% block content %}
 <div class="main-products">
+
     <ul class="menu-products-header">
-        {% for link in menu_links %}
-            <li class="menu-products-header-link"><a href="{{ link.href }}">{{ link.text }}</a></li>
-        {% endfor %}
+        {% include 'my_geek_shop/includes/inc_category_menu.html' %}
     </ul>
 
     <div class="block-products">

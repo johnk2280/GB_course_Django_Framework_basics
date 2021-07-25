@@ -1,0 +1,7 @@
+{% load static %}
+
+
+<li class="menu-products-header-link"><a href="">ALL</a></li>
+{% for category in menu_links %}
+    <li class="menu-products-header-link"><a href="">{{ category.name }}</a></li>
+{% endfor %}

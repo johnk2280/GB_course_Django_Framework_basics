@@ -6,6 +6,7 @@ class ProductCategory(models.Model):
         verbose_name='имя',
         max_length=64,
         unique=True,
+        db_index=True,
     )
     description = models.TextField(
         verbose_name='описание',

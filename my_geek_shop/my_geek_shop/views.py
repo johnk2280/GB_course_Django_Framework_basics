@@ -1,5 +1,12 @@
 from django.shortcuts import render
+
+from mainapp.models import ProductCategory, Product
+
 import json
+
+
+def get_categories():
+    return ProductCategory.objects.values()
 
 
 def read_context_file():
@@ -12,7 +19,7 @@ def get_page_data(page_name):
     return {
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
-        'menu_links': data[page_name]['menu_links'],
+        'menu_links': get_categories(),
     }
 
 

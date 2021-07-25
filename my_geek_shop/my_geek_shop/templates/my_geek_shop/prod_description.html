@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="menu-products-field">
+    
     <ul class="menu-products-block">
-        {% for link in menu_links %}
-            <li class="menu-products-header-link"><a href="{{ lint.href }}">{{ link.text }}</a></li>
-        {% endfor %}
+        {% include 'my_geek_shop/includes/inc_category_menu.html' %}
     </ul>
 </div>
 
