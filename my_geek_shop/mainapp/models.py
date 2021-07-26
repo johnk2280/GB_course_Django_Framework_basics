@@ -82,5 +82,15 @@ class ProductsFile(models.Model):
         db_index=True,
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.name = kwargs['name']
+        self.short_description = kwargs['short_description']
+        self.img = kwargs['img']
+        self.description = kwargs['description']
+        self.price = float(kwargs['price'])
+        self.quantity = int(kwargs['quantity'])
+        self.category_id = int(kwargs['category_id'])
+
     def __str__(self):
         return self.file
