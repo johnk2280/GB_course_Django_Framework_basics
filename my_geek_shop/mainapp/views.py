@@ -1,17 +1,13 @@
 from django.shortcuts import render
 
-import os
-import csv
-
 from mainapp.models import ProductCategory, Product, ProductsFile
 
 import json
-
-from my_geek_shop.settings import BASE_DIR
+import csv
 
 
 def get_categories():
-    return ProductCategory.objects.values()
+    pass
 
 
 def read_context_file():
@@ -19,40 +15,35 @@ def read_context_file():
         return json.load(f)
 
 
-def check_file_upload():
-    pass
+def get_files_to_upload():
+    return ProductsFile.objects.filter(is_uploaded=False)
 
 
-def get_products_from_file(file):
-    added_products = []
-    file_path = os.path.join(BASE_DIR, 'media', file)
-    with open(file_path, 'r', encoding='utf-16') as f_obj:
+def get_products(file) -> csv.DictReader:
+    with open(file.file.path, 'r', encoding='utf-16') as f_obj:
         file_reader = csv.DictReader(f_obj)
         for row in file_reader:
-            added_products.append(row)
-
-    # TODO: здесь реализовать через yield
-
-    return added_products
-
-
-def get_uploaded_products_files():
-    uploaded_files = [
-        file for file in sorted(ProductsFile.objects.values(), reverse=True) if file['is_uploaded'] == False
-    ]
-    # TODO: здесь реализовать выборку через query selectors
-    return uploaded_files
+            yield row
 
 
 def add_products():
-    uploaded_files = get_uploaded_products_files()
-    for file in uploaded_files:
-        products = get_products_from_file(file['file'])
-        for product in products:
-            added_product = Product(**product)
-            added_product.save()
+    uploaded_files = get_files_to_upload()
+    if uploaded_files:
+        for file in uploaded_files:
+            for product in get_products(file):
+                added_product = Product(
+                    name=product['name'],
+                    short_description=product['short_description'],
+                    img=product['img'],
+                    description=product['description'],
+                    price=float(product['price']),
+                    quantity=int(product['quantity']),
+                    category_id=int(product['category_id']),
+                )
+                added_product.save()
 
-        # TODO: здесь реализовать установки флага 'is_uploaded' в True
+            file.is_uploaded = True
+            file.save()
 
 
 def get_page_data(page_name):
