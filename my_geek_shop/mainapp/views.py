@@ -1,17 +1,22 @@
+import os
+
 from django.shortcuts import render
 
 from mainapp.models import ProductCategory, Product, ProductsFile
+
+from my_geek_shop.settings import STATICFILES_DIRS
 
 import json
 import csv
 
 
 def get_categories():
-    pass
+    return ProductCategory.objects.values()
 
 
-def read_context_file():
-    with open('my_geek_shop/static/my_geek_shop/context.json', 'r', encoding='utf-8') as f:
+def load_from_json(file):
+    file_path = os.path.join(STATICFILES_DIRS[0], 'my_geek_shop', file)
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 
@@ -19,7 +24,7 @@ def get_files_to_upload():
     return ProductsFile.objects.filter(is_uploaded=False)
 
 
-def get_products(file) -> csv.DictReader:
+def get_products(file):
     with open(file.file.path, 'r', encoding='utf-16') as f_obj:
         file_reader = csv.DictReader(f_obj)
         for row in file_reader:
@@ -47,7 +52,7 @@ def add_products():
 
 
 def get_page_data(page_name):
-    data = read_context_file()
+    data = load_from_json('context.json')
     # TODO: добавить данные в словарь и реализовать динамическое наполнение товарами
     return {
         'title': data[page_name]['title'],

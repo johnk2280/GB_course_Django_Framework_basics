@@ -2,20 +2,24 @@ from django.shortcuts import render
 
 from mainapp.models import ProductCategory, Product
 
+from my_geek_shop.settings import STATICFILES_DIRS
+
 import json
+import os
 
 
 def get_categories():
     return ProductCategory.objects.values()
 
 
-def read_context_file():
+def load_from_json(file):
+    file_path = os.path.join(STATICFILES_DIRS[0], 'my_geek_shop', file)
     with open('my_geek_shop/static/my_geek_shop/context.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
 
 def get_page_data(page_name):
-    data = read_context_file()
+    data = load_from_json('context.json')
     return {
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
