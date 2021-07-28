@@ -27,6 +27,7 @@ urlpatterns = [
     path('', render_index, name='index'),
     path('contacts/', render_contacts, name='contacts'),
     path('prod_description/', render_prod_description, name='prod_description'),
+    path('auth/', include('authapp.urls', namespace='auth')),
 ]
 
 if settings.DEBUG:
