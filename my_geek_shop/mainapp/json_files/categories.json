@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "name": "HOME",
+      "description": ""
+    },
+    {
+      "name": "OFFICE",
+      "description": ""
+    },
+    {
+      "name": "FURNITURE",
+      "description": ""
+    },
+    {
+      "name": "MODERN",
+      "description": ""
+    },
+    {
+      "name": "CLASSIC",
+      "description": ""
+    },
+    {
+      "name": "LIGHTING",
+      "description": ""
+    },
+    {
+      "name": "CHAIRS",
+      "description": ""
+    },
+    {
+      "name": "SOFAS",
+      "description": ""
+    },
+    {
+      "name": "DECOR",
+      "description": ""
+    }
+  ]
+}
