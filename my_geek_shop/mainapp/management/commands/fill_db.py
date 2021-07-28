@@ -2,9 +2,9 @@ import csv
 import json
 import os
 
-from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
+from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
 
 CSV_PATH = 'mainapp/csv_files'
@@ -39,8 +39,9 @@ class Command(BaseCommand):
             added_product = Product(**product)
             added_product.save()
 
-        super_user = User.objects.create_user(
+        ShopUser.objects.create_superuser(
             'Evgen',
             'Evgen@geekshop.local',
-            'geekbrains',
+            '123',
+            age=33,
         )
