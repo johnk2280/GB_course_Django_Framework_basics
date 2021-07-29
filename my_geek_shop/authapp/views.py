@@ -25,6 +25,8 @@ def login(request):
         'login_form': login_form,
     }
     return render(request, 'authapp/login.html', context)
+
+
 # TODO: создать шаблоны login.html и прочие
 
 
@@ -32,3 +34,10 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+
+def register_account(request):
+    return HttpResponseRedirect(reverse('index'))
+
+
+def edit_account(request):
+    return HttpResponseRedirect(reverse('index'))
