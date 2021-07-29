@@ -5,10 +5,11 @@
 <body>
 
 {% block header %}
-    {% include 'authapp/includes/inc_login_header.html' %}
+{% include 'authapp/includes/inc_login_header.html' %}
 {% endblock%}
 
 {% block content %}
+
 <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
     {% csrf_token %}
     {{ login_form.as_ul }}
@@ -16,6 +17,9 @@
     <input class="form-control" type="submit" value="SUBMIT">
 </form>
 
+<button class="btn btn-round form-control">
+    <a href="{% url 'auth:register' %}" class="">REGISTER</a>
+</button>
 
 {% endblock %}
 
