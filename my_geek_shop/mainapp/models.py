@@ -57,8 +57,6 @@ class Product(models.Model):
         default=0,
     )
 
-    # TODO: реализовать перегрузку __init__
-
     def __str__(self):
         return f'{self.name} - {self.pk}'
 

@@ -36,15 +36,8 @@ def add_products():
     if uploaded_files:
         for file in uploaded_files:
             for product in get_products(file):
-                added_product = Product(
-                    name=product['name'],
-                    short_description=product['short_description'],
-                    img=product['img'],
-                    description=product['description'],
-                    price=float(product['price']),
-                    quantity=int(product['quantity']),
-                    category_id=int(product['category_id']),
-                )
+                # TODO: реализовать подстановку объекта категории
+                added_product = Product(**product)
                 added_product.save()
 
             file.is_uploaded = True

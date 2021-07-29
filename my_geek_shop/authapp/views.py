@@ -27,9 +27,6 @@ def login(request):
     return render(request, 'authapp/login.html', context)
 
 
-# TODO: создать шаблоны login.html и прочие
-
-
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
