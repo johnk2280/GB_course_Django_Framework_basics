@@ -1,0 +1,22 @@
+{% extends "authapp/base.html" %}
+{% load static  %}
+
+
+<body>
+
+{% block header %}
+    {% include 'authapp/includes/inc_login_header.html' %}
+{% endblock%}
+
+{% block content %}
+<form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+    {% csrf_token %}
+    {{ login_form.as_p }}
+    <br>
+    <input class="form-control" type="submit" value="SUBMIT">
+</form>
+
+
+{% endblock %}
+
+</body>
