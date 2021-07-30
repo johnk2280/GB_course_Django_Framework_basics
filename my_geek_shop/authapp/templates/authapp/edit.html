@@ -6,19 +6,24 @@
 {% endblock%}
 
 {% block content %}
+<div class="row">
+    <div class="col-3">
 
-<form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
 
-    {% csrf_token %}
-    {{ edit_form.as_p }}
-    <br>
-    <input class="form-control" type="submit" value="SAVE">
+        <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
 
-</form>
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <br>
+            <input class="form-control" type="submit" value="SAVE">
 
-<button class="btn btn-round form-control last">
-    <a href="{% url 'index' %}" class="">TO MAIN</a>
-</button>
+        </form>
 
-<div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+        <button class="btn btn-round form-control last">
+            <a href="{% url 'index' %}" class="">TO MAIN</a>
+        </button>
+
+        <div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+    </div>
+</div>
 {% endblock %}
