@@ -1,13 +1,11 @@
 import os
+import json
+import csv
 
 from django.shortcuts import render
 
 from mainapp.models import ProductCategory, Product, ProductsFile
-
 from my_geek_shop.settings import STATICFILES_DIRS
-
-import json
-import csv
 
 
 def get_categories():
@@ -36,7 +34,9 @@ def add_products():
     if uploaded_files:
         for file in uploaded_files:
             for product in get_products(file):
-                # TODO: реализовать подстановку объекта категории
+                category_name = product['category']
+                category = ProductCategory.objects.get(name=category_name)
+                product['category'] = category
                 added_product = Product(**product)
                 added_product.save()
 
@@ -51,7 +51,6 @@ def get_page_data(page_name):
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
         'menu_links': get_categories(),
-
     }
 
 

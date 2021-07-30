@@ -12,12 +12,13 @@
 
 <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
     {% csrf_token %}
-    {{ login_form.as_ul }}
+    {{ login_form.as_p }}
     <br>
     <input class="form-control" type="submit" value="SUBMIT">
 </form>
+<br>
 
-<button class="btn btn-round form-control">
+<button type="button" class="btn form-control btn-primary">
     <a href="{% url 'auth:register' %}" class="">REGISTER</a>
 </button>
 
