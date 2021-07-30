@@ -131,9 +131,10 @@ body {
     color: #212121;
     font-weight: 700;
     letter-spacing: 1.4px;
-    border-bottom: 3px solid #212121;*/
+    border-bottom: 3px solid #212121;
 
 }
+*/
 
 .menu-search {
     border-radius: 50%;
@@ -235,9 +236,9 @@ body {
 }
 
 .circle:hover {
-    border-radius: 50%px;
+    border-radius: 50px;
     background-color: #c7c7c7;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     box-shadow: 0 5px 10px 1px rgba(33, 33, 33, 0.35);
 }
 
@@ -371,8 +372,8 @@ body {
 }
 
 .promo {
-    width: 683;
-    height: 683;
+    width: 683px;
+    height: 683px;
     display: inline-block;
     
    
