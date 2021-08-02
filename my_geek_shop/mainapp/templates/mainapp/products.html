@@ -16,7 +16,7 @@
 
         {% for product in products %}
         <div class="element-products">
-            <a href="#">
+            <a href="{% url 'basket:add_product_to_basket' product.pk %}">
                 <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}">
             </a>
         </div>

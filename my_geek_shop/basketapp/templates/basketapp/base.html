@@ -1,0 +1,33 @@
+{% load static  %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %}{{ title }}{% endblock %}</title>
+    <link rel="stylesheet" href="{%  static 'my_geek_shop/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="conteiner">
+
+    {% block header %}
+    <div class="header-products header-contacts">
+        {% include 'my_geek_shop/includes/inc_header_menu.html' %}
+        <h2 class="OurProductsRange Contacts"> {% block header_text %}{% endblock %} </h2>
+    </div>
+    {% endblock%}
+
+    {% block content %}
+    {% endblock %}
+
+    {% include 'my_geek_shop/includes/inc_footer.html' %}
+
+</div>
+
+</body>
+
+</html>

@@ -22,3 +22,15 @@ class Basket(models.Model):
         verbose_name='время',
         auto_now_add=True,
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @property
+    def get_basket_cost(self):
+        pass
+
+    @property
+    def get_products_quantity(self):
+        return len(self.objects.all())
+
