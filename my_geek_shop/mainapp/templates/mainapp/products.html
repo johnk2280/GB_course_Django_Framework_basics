@@ -13,32 +13,17 @@
     </ul>
 
     <div class="block-products">
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-11.jpg" alt=""></a>
+
+        {% for product in products %}
+        <div class="element-products">
+            <a href="#">
+                <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}">
+            </a>
         </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-21.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-31.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-41.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-5.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-6.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-11.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-21.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-31.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-41.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-5.jpg" alt=""></a>
-        </div>
-        <div class="element-products"><a href="#"><img src="/static/my_geek_shop/img/product-6.jpg" alt=""></a>
-        </div>
+        {% endfor %}
 
     </div>
+
     <div class="update-arrow">
         <a href="#"><img src="/static/my_geek_shop/img/update-arrow.jpg" alt=""></a>
     </div>

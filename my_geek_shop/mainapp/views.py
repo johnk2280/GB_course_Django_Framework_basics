@@ -1,15 +1,16 @@
 import os
 import json
 import csv
+from random import shuffle
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from mainapp.models import ProductCategory, Product, ProductsFile
 from my_geek_shop.settings import STATICFILES_DIRS
 
 
 def get_categories():
-    return ProductCategory.objects.values()
+    return ProductCategory.objects.all()
 
 
 def load_from_json(file):
@@ -46,7 +47,6 @@ def add_products():
 
 def get_page_data(page_name):
     data = load_from_json('context.json')
-    # TODO: добавить данные в словарь и реализовать динамическое наполнение товарами
     return {
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
@@ -54,12 +54,28 @@ def get_page_data(page_name):
     }
 
 
-def render_products(request):
+def render_products(request, pk=None):
     add_products()
     context = get_page_data('products')
+    if pk:
+        if pk == 0:
+            products = Product.objects.all().order_by('-quantity')
+            category = {'name': 'ALL'}
+        else:
+            category = get_object_or_404(ProductCategory, pk=pk)
+            products = Product.objects.filter(category__pk=pk).order_by('-quantity')
+
+        context['category'] = category
+        context['products'] = products
+
+        return render(request, 'mainapp/products.html', context)
+
+    products = list(Product.objects.all())
+    shuffle(products)
+    context['products'] = products[:12]
+
     return render(request, 'mainapp/products.html', context)
 
 
-def get_category(request, pk=None):
-    # TODO: здесь реализовать обработку вызова категорий
-    print(pk)
+# def get_category(request, pk=None):
+#     print(pk)
