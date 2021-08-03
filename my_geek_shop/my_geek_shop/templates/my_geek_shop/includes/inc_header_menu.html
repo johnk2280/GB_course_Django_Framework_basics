@@ -10,19 +10,28 @@
         <li class="menu-list"><a href="" class="menu-link">SHOWROOM</a></li>
         <li class="menu-list"><a href="{% url 'contacts' %}" class="menu-link">CONTACT</a></li>
         {% if user.is_authenticated %}
-            <li class="menu-list"><a href="{% url 'auth:edit' %}" class="menu-link">{{ user.username | default:'user' }}</a></li>
+        <li class="menu-list"><a href="{% url 'auth:edit' %}" class="menu-link">{{ user.username | default:'user' }}</a>
+        </li>
         {% endif %}
         <li class="menu-list">
             {% if user.is_authenticated %}
-                <a href="{% url 'auth:logout' %}" class="menu-link">QUIT</a>
+            <a href="{% url 'auth:logout' %}" class="menu-link">QUIT</a>
             {% else %}
-                <a href="{% url 'auth:login' %}" class="menu-link">ENTER</a>
+            <a href="{% url 'auth:login' %}" class="menu-link">ENTER</a>
             {% endif %}
         </li>
-        <li class="menu-list menu-search"><a href="#" class="menu-search-link"><img
-                src="{%  static 'my_geek_shop/img/search.svg' %}" alt="search"></a></li>
-        <li class="menu-list menu-search"><a href="#" class="menu-search-link"><img
-                src="{%  static 'my_geek_shop/img/basket.svg' %}" alt="basket"></a></li>
+        <li class="menu-list menu-search">
+            <a href="#" class="menu-search-link">
+                <img src="{%  static 'my_geek_shop/img/search.svg' %}" alt="search">
+            </a>
+        </li>
+        <li class="menu-list">
+            <a href="" class="menu-link basket-link">
+                <img src="{%  static 'my_geek_shop/img/basket.svg' %}" alt="basket">
+                {% if basket %} {{ basket.quantity }} {% endif %}
+            </a>
+        </li>
+        <li class="menu-list"><a href="" class="menu-link">{{ quantity }}</a></li>
 
     </ul>
 </div>

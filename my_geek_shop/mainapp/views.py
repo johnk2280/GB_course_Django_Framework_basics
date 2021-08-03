@@ -5,6 +5,7 @@ from random import shuffle
 
 from django.shortcuts import render, get_object_or_404
 
+from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product, ProductsFile
 from my_geek_shop.settings import STATICFILES_DIRS
 
@@ -57,25 +58,20 @@ def get_page_data(page_name):
 def render_products(request, pk=None):
     add_products()
     context = get_page_data('products')
-    if pk:
-        if pk == 0:
-            products = Product.objects.all().order_by('-quantity')
-            category = {'name': 'ALL'}
-        else:
-            category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('-quantity')
+    if pk and pk != 0:
+        products = Product.objects.filter(category__pk=pk).order_by('-quantity')
+        category = get_object_or_404(ProductCategory, pk=pk)
+    else:
+        products = Product.objects.all()
+        category = {'name': 'ALL'}
 
-        context['category'] = category
-        context['products'] = products
-
-        return render(request, 'mainapp/products.html', context)
-
-    products = list(Product.objects.all())
-    shuffle(products)
+    context['category'] = category
     context['products'] = products[:12]
+    context['quantity'] = sum(
+        product.quantity for product in Basket.objects.filter(user=request.user)
+    ) if request.user.is_authenticated else 0
 
     return render(request, 'mainapp/products.html', context)
-
 
 # def get_category(request, pk=None):
 #     print(pk)

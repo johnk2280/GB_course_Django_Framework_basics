@@ -27,10 +27,10 @@ class Basket(models.Model):
         super().__init__(*args, **kwargs)
 
     @property
-    def get_basket_cost(self):
+    def get_basket_cost(self, request):
         pass
 
     @property
-    def get_products_quantity(self):
-        return len(self.objects.all())
+    def get_products_quantity(self, request):
+        return sum(product.quantity for product in self.objects.filter(user=request.user))
 
