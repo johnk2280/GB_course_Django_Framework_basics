@@ -17,14 +17,10 @@ def add_product_to_basket(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def remove_product_from_basket(request):
-    title = 'Корзина'
-    text = 'products in the cart'
-    context = {
-        'title': title,
-        'text': text,
-    }
-    return render(request, 'basketapp/basket.html', context)
+def remove_product_from_basket(request, pk):
+    product = get_object_or_404(Basket, pk=pk)
+    product.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def get_basket_content():
@@ -34,8 +30,10 @@ def get_basket_content():
 def render_basket(request):
     title = 'Корзина'
     text = 'products in the cart'
+    basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
     context = {
         'title': title,
         'text': text,
+        'basket_items': basket_items,
     }
     return render(request, 'basketapp/basket.html', context)

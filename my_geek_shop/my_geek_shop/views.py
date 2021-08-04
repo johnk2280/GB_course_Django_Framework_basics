@@ -39,5 +39,5 @@ def render_contacts(request):
 
 
 def render_prod_description(request):
-    context = get_page_content(page_name='contacts', user=request.user)
+    context = get_page_content(page_name='prod_description', user=request.user)
     return render(request, 'my_geek_shop/prod_description.html', context)

@@ -7,10 +7,25 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-3">
-
-
+    {% for item in basket_items %}
+    <div class="basket_record">
+        <img src="/media/products_images/{{ item.product.img }}" alt="{{ item.product.short_description }}" width="90"
+             height="90">
+        <span class="category_name">{{ item.product.category.name }}</span>
+        <span class="product_name">{{ item.product.name }}</span>
+        <span class="product_price">{{ item.product.price }} руб</span>
+        <input type="number" name="{{ item.pk }}"
+               min="0"
+               value="{{ item.quantity }}">
+        <span class="product_cost">{{ item.get_product_total_cost }} руб</span>
+        <button class="btn btn-round">
+            <a href="{% url 'basket:remove' item.pk %}" class="">
+                remove
+            </a>
+        </button>
     </div>
+    {% endfor %}
+
 </div>
 {% endblock %}
 

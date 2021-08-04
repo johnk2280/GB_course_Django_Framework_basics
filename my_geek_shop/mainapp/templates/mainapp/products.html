@@ -17,7 +17,7 @@
         {% for product in products %}
         <div class="element-products">
             <a href="{% url 'basket:add' product.pk %}">
-                <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}">
+                <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}" width="370" height="370">
             </a>
         </div>
         {% endfor %}
