@@ -24,7 +24,7 @@ def get_files_to_upload():
     return ProductsFile.objects.filter(is_uploaded=False)
 
 
-def get_products(file):
+def get_products_from_csv(file):
     with open(file.file.path, 'r', encoding='utf-16') as f_obj:
         file_reader = csv.DictReader(f_obj)
         for row in file_reader:
@@ -35,7 +35,7 @@ def add_products():
     uploaded_files = get_files_to_upload()
     if uploaded_files:
         for file in uploaded_files:
-            for product in get_products(file):
+            for product in get_products_from_csv(file):
                 category_name = product['category']
                 category = ProductCategory.objects.get(name=category_name)
                 product['category'] = category
@@ -46,33 +46,34 @@ def add_products():
             file.save()
 
 
-def get_page_data(page_name):
+def get_page_data(page_name, user):
     data = load_from_json('context.json')
     return {
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
         'menu_links': get_categories(),
+        'basket': get_basket(user)
     }
+
+
+def get_basket(user):
+    return Basket.objects.filter(user=user) if user.is_authenticated else []
+
+
+def get_products_from_db(pk):
+    if pk and pk != 0:
+        return Product.objects.filter(category__pk=pk).order_by('-quantity')
+
+    return Product.objects.all()
 
 
 def render_products(request, pk=None):
     add_products()
-    context = get_page_data('products')
-    if pk and pk != 0:
-        products = Product.objects.filter(category__pk=pk).order_by('-quantity')
-        category = get_object_or_404(ProductCategory, pk=pk)
-    else:
-        products = Product.objects.all()
-        category = {'name': 'ALL'}
+    context = get_page_data(page_name='products', user=request.user)
+    products = get_products_from_db(pk)
+    category = get_object_or_404(ProductCategory, pk=pk) or {'name': 'ALL'}
 
     context['category'] = category
     context['products'] = products[:12]
-    context['basket'] = Basket.objects.filter(user=request.user)
-    # sum(
-    #     product.quantity for product in Basket.objects.filter(user=request.user)
-    # ) if request.user.is_authenticated else 0
 
     return render(request, 'mainapp/products.html', context)
-
-# def get_category(request, pk=None):
-#     print(pk)
