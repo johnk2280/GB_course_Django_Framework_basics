@@ -57,7 +57,7 @@ def get_products_from_db_by(pk):
     return list(Product.objects.all())
 
 
-def get_hot_offer():
+def get_hot_deal():
     return sample(list(Product.objects.all()), 1)[0]
 
 
@@ -71,7 +71,7 @@ def get_products_category(pk):
 
 def get_page_content(page_name, user):
     data = load_from_json('context.json')
-    hot_product = get_hot_offer()
+    hot_product = get_hot_deal()
     return {
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],

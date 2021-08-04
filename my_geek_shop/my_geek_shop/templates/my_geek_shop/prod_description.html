@@ -20,7 +20,7 @@
 
 <div class="product-slider">
     <div class="product-foto product-atributes">
-        <div class="product-big-foto"><img src="/static/my_geek_shop/img/slider1big.jpg" alt="slider1"></div>
+        <div class="product-big-foto"><img src="/media/products_images/{{ hot_product.img }}" alt="slider1"></div>
         <div class="product-small-fotos">
             <ul class="string-fotos-block">
                 <li class="string-fotos"><a href="#"><img src="/static/my_geek_shop/img/controll.jpg"
@@ -33,16 +33,12 @@
         </div>
     </div>
     <div class="product-price product-atributes">
-        <h2 class="h2-atributes">Fishnet Chair</h2>
+        <h2 class="h2-atributes">{{ hot_product.name|title }}</h2>
         <p class="HotDeal">Hot Deal</p>
-        <h2 class="h2-price">$ 36.7/sq</h2>
-        <a href="/prod_description" class="button-price">Order Us</a>
-        <p class="price-content">The majesty of Mountains - Ugmonk style.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident.
+        <h2 class="h2-price">{{ hot_product.price}} руб</h2>
+        <a href="{% url 'basket:add' hot_product.pk %}" class="button-price">Order Us</a>
+        <p class="price-content">
+            {{ hot_product.short_description }}
         </p>
     </div>
 </div>
@@ -55,8 +51,14 @@
             <div class="explore-all-product"><a href="#" class="button-explore">Explore all</a></div>
         </div>
 
-        <div class="block3-product"><a href="#"><img src="/static/my_geek_shop/img/product-11.jpg" alt=""></a></div>
-        <div class="block3-product"><a href="#"><img src="/static/my_geek_shop/img/product-21.jpg" alt=""></a></div>
-        <div class="block3-product"><a href="#"><img src="/static/my_geek_shop/img/product-31.jpg" alt=""></a></div>
+        {% for product in same_products %}
+            <div class="block3-product">
+                <a href="#">
+                    <img src="media/products_images/{{ product.img }}" alt="{{ product.name }}">
+                </a>
+            </div>
+        {% endfor %}
+<!--        <div class="block3-product"><a href="#"><img src="/static/my_geek_shop/img/product-21.jpg" alt=""></a></div>-->
+<!--        <div class="block3-product"><a href="#"><img src="/static/my_geek_shop/img/product-31.jpg" alt=""></a></div>-->
     </div>
 {% endblock %}
