@@ -1,7 +1,7 @@
 import os
 import json
 import csv
-from random import shuffle
+from random import shuffle, sample
 
 from django.shortcuts import render, get_object_or_404
 
@@ -31,7 +31,7 @@ def get_products_from_csv(file):
             yield row
 
 
-def add_products():
+def add_products_from_files():
     uploaded_files = get_files_to_upload()
     if uploaded_files:
         for file in uploaded_files:
@@ -46,34 +46,49 @@ def add_products():
             file.save()
 
 
-def get_page_data(page_name, user):
+def get_basket(user):
+    return list(Basket.objects.filter(user=user)) if user.is_authenticated else []
+
+
+def get_products_from_db_by(pk):
+    if pk and pk != 0:
+        return list(Product.objects.filter(category__pk=pk).order_by('-quantity'))
+
+    return list(Product.objects.all())
+
+
+def get_hot_offer():
+    return sample(list(Product.objects.all()), 1)[0]
+
+
+def get_same_products(hot_product):
+    return Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+
+
+def get_products_category(pk):
+    return get_object_or_404(ProductCategory, pk=pk) if pk and pk != 0 else {'name': 'ALL'}
+
+
+def get_page_content(page_name, user):
     data = load_from_json('context.json')
+    hot_product = get_hot_offer()
     return {
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
         'menu_links': get_categories(),
-        'basket': get_basket(user)
+        'basket': get_basket(user),
+        'hot_product': hot_product,
+        'same_products': get_same_products(hot_product),
     }
 
 
-def get_basket(user):
-    return Basket.objects.filter(user=user) if user.is_authenticated else []
-
-
-def get_products_from_db(pk):
-    if pk and pk != 0:
-        return Product.objects.filter(category__pk=pk).order_by('-quantity')
-
-    return Product.objects.all()
-
-
 def render_products(request, pk=None):
-    add_products()
-    context = get_page_data(page_name='products', user=request.user)
-    products = get_products_from_db(pk)
-    category = get_object_or_404(ProductCategory, pk=pk) or {'name': 'ALL'}
+    add_products_from_files()
+    context = get_page_content(page_name='products', user=request.user)
+    products = get_products_from_db_by(pk)
+    shuffle(products)
 
-    context['category'] = category
+    context['category'] = get_products_category(pk)
     context['products'] = products[:12]
 
     return render(request, 'mainapp/products.html', context)
