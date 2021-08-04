@@ -67,9 +67,10 @@ def render_products(request, pk=None):
 
     context['category'] = category
     context['products'] = products[:12]
-    context['quantity'] = sum(
-        product.quantity for product in Basket.objects.filter(user=request.user)
-    ) if request.user.is_authenticated else 0
+    context['basket'] = Basket.objects.filter(user=request.user)
+    # sum(
+    #     product.quantity for product in Basket.objects.filter(user=request.user)
+    # ) if request.user.is_authenticated else 0
 
     return render(request, 'mainapp/products.html', context)
 

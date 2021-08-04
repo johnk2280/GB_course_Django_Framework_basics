@@ -26,12 +26,17 @@
             </a>
         </li>
         <li class="menu-list">
-            <a href="" class="menu-link basket-link">
+            <a href="{% url 'basketapp:basket' %}" class="menu-link basket-link">
                 <img src="{%  static 'my_geek_shop/img/basket.svg' %}" alt="basket">
-                {% if basket %} {{ basket.quantity }} {% endif %}
+
             </a>
         </li>
-        <li class="menu-list"><a href="" class="menu-link">{{ quantity }}</a></li>
-
+        <li class="menu-list"><a href="" class="menu-link">
+            {% if basket %}
+                {{ basket.0.get_products_quantity }} шт
+                {{ basket.0.get_basket_cost|floatformat:0 }} руб
+            {% endif %}
+        </a>
+        </li>
     </ul>
 </div>

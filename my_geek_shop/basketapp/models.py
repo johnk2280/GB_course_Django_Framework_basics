@@ -23,14 +23,14 @@ class Basket(models.Model):
         auto_now_add=True,
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    @property
+    def get_product_total_cost(self):
+        return self.product.price * self.quantity
 
     @property
-    def get_basket_cost(self, request):
-        pass
+    def get_basket_cost(self):
+        return sum(product.get_product_total_cost for product in Basket.objects.filter(user=self.user))
 
     @property
-    def get_products_quantity(self, request):
-        return sum(product.quantity for product in self.objects.filter(user=request.user))
-
+    def get_products_quantity(self):
+        return sum(product.quantity for product in Basket.objects.filter(user=self.user))
