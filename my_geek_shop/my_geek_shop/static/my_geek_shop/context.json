@@ -59,6 +59,10 @@
       }
     ]
   },
+  "hot_deal": {
+    "title": "Горячее предложение",
+    "text": ""
+  },
   "header_menu_links": [
     {
       "href": "{% url 'index' %}",
