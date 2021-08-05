@@ -31,7 +31,7 @@
 
             </a>
         </li>
-        <li class="menu-list"><a href="" class="menu-link">
+        <li class="menu-list"><a href="{% url 'basketapp:basket' %}" class="menu-link">
             {% if basket %}
                 {{ basket.0.get_products_quantity }} шт
                 {{ basket.0.get_basket_cost|floatformat:0 }} руб

@@ -62,7 +62,7 @@ def get_hot_deal():
 
 
 def get_same_products(hot_product):
-    return Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+    return list(Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk))[:3]
 
 
 def get_products_category(pk):

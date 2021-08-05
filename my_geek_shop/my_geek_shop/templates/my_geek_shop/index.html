@@ -28,16 +28,16 @@
             <li class="menu-block1-list"><a href="" class="menu-block1-link">Featured</a></li>
             <li class="menu-block1-list"><a href="" class="menu-block1-link">New</a></li>
         </ul>
-        <div class="explore-all"><a href="#" class="button-explore">Explore all</a></div>
+        <div class="explore-all"><a href="{% url 'products:index' %}" class="button-explore">Explore all</a></div>
         <ul class="product-block1">
-            <li class="product-block1-list"><a href="#"><img src="{%  static 'my_geek_shop/img/product-1.jpg' %}"
-                                                             alt="Product-1"></a></li>
-            <li class="product-block1-list"><a href="#"><img src="{%  static 'my_geek_shop/img/product-2.jpg' %}"
-                                                             alt="Product-2"></a></li>
-            <li class="product-block1-list"><a href="#"><img src="{%  static 'my_geek_shop/img/product-3.jpg' %}"
-                                                             alt="Product-3"></a></li>
-            <li class="product-block1-list"><a href="#"><img src="{%  static 'my_geek_shop/img/product-4.jpg' %}"
-                                                             alt="Product-4"></a></li>
+            {% for product in products %}
+                <li class="product-block1-list">
+                    <a href="{% url 'prod_description' product.pk  %}">
+                        <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}">
+                    </a>
+                </li>
+            {% endfor %}
+
         </ul>
     </div>
     <div class="block2">

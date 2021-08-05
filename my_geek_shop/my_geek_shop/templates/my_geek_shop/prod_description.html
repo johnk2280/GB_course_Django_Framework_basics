@@ -21,24 +21,24 @@
 <div class="product-slider">
     <div class="product-foto product-atributes">
         <div class="product-big-foto">
-            <img src="/media/products_images/{{ hot_product.img }}" alt="slider1" width="570" height="570">
+            <img src="/media/products_images/{{ selected_product.img }}" alt="slider1" width="570" height="570">
         </div>
         <div class="product-small-fotos">
             <ul class="string-fotos-block">
                 <li class="string-fotos">
                     <a href="#">
-                        <img src="/media/products_images/{{ hot_product.img }}" alt="controll" width="70" height="70">
+                        <img src="/media/products_images/{{ selected_product.img }}" alt="controll" width="70" height="70">
                     </a>
                 </li>
                 <li class="string-fotos">
                     <a href="#">
-                        <img src="/media/products_images/{{ hot_product.img }}"
+                        <img src="/media/products_images/{{ selected_product.img }}"
                              alt="controll11" width="70" height="70">
                     </a>
                 </li>
                 <li class="string-fotos">
                     <a href="#">
-                        <img src="/media/products_images/{{ hot_product.img }}"
+                        <img src="/media/products_images/{{ selected_product.img }}"
                              alt="controll2" width="70" height="70">
                     </a>
                 </li>
@@ -46,12 +46,12 @@
         </div>
     </div>
     <div class="product-price product-atributes">
-        <h2 class="h2-atributes">{{ hot_product.name|title }}</h2>
+        <h2 class="h2-atributes">{{ selected_product.name|title }}</h2>
         <p class="HotDeal">Buy In One Click</p>
-        <h2 class="h2-price">{{ hot_product.price}} руб</h2>
+        <h2 class="h2-price">{{ selected_product.price}} руб</h2>
         <a href="{% url 'basket:add' hot_product.pk %}" class="button-price">Order Us</a>
         <p class="price-content">
-            {{ hot_product.short_description }}
+            {{ selected_product.short_description }}
         </p>
     </div>
 </div>
@@ -61,12 +61,12 @@
         <div class="RelatedProducts">
             <h2 class="h2-RelatedProducts">Same Products</h2>
         </div>
-        <div class="explore-all-product"><a href="#" class="button-explore">Explore all</a></div>
+        <div class="explore-all-product"><a href="{% url 'products:index' %}" class="button-explore">Explore all</a></div>
     </div>
 
     {% for product in same_products %}
     <div class="block3-product">
-        <a href="">
+        <a href="{% url 'prod_description' product.pk  %}">
             <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}" width="370" height="370">
         </a>
     </div>

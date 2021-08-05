@@ -68,7 +68,7 @@
 
     {% for product in same_products %}
     <div class="block3-product">
-        <a href="">
+        <a href="{% url 'prod_description' product.pk  %}">
             <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}" width="370" height="370">
         </a>
     </div>
