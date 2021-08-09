@@ -49,7 +49,7 @@
         <h2 class="h2-atributes">{{ selected_product.name|title }}</h2>
         <p class="HotDeal">Buy In One Click</p>
         <h2 class="h2-price">{{ selected_product.price}} руб</h2>
-        <a href="{% url 'basket:add' hot_product.pk %}" class="button-price">Order Us</a>
+        <a href="{% url 'basket:add' selected_product.pk %}" class="button-price">Order Us</a>
         <p class="price-content">
             {{ selected_product.short_description }}
         </p>

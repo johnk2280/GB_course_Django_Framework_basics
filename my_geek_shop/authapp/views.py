@@ -10,6 +10,7 @@ def login(request):
     text = 'login to the system'
 
     login_form = ShopUserLoginForm(data=request.POST)
+    next_url = request.GET['next'] if 'next' in request.GET.keys() else ''
     if request.method == 'POST' and login_form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
@@ -17,12 +18,16 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
             auth.login(request, user)
+            if 'next' in request.POST.keys():
+                return HttpResponseRedirect(request.POST['next'])
+
             return HttpResponseRedirect(reverse('index'))
 
     context = {
         'title': title,
         'text': text,
         'login_form': login_form,
+        'next': next_url,
     }
     return render(request, 'authapp/login.html', context)
 
