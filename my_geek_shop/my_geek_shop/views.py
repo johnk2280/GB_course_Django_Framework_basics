@@ -28,6 +28,7 @@ def load_from_json(file):
 #     }
 
 
+
 def render_index(request):
     context = get_page_content(page_name='contacts', user=request.user)
     context['products'] = Product.objects.all()[:4]
