@@ -4,7 +4,7 @@
 {% block content %}
   <div class="products_list">
     <button class="new_product">
-      <a href="{% url 'admin:product_create' category.pk %}"> new product </a>
+      <a href="{% url 'admin:create_product' category.pk %}"> new product </a>
     </button>
 		
     {% for object in objects %}
@@ -15,7 +15,7 @@
         </div>
         <div class="product_actions">
           <button>
-            <a href="{% url 'admin:get_product' object.pk %}"> more details </a>
+            <a href="{% url 'admin:product' object.pk %}"> more details </a>
           </button>
           <button>
             <a href="{% url 'admin:update_product' object.pk %}"> edit </a>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import user_passes_test
 
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
@@ -8,6 +9,7 @@ def create_user(request):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def get_users(request):
     title = 'admin panel/users'
     users = ShopUser.objects.all().order_by('-is_active', '-is_superuser', '-is_staff', 'username')
