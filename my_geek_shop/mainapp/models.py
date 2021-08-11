@@ -12,6 +12,10 @@ class ProductCategory(models.Model):
         verbose_name='описание',
         blank=True,
     )
+    is_active = models.BooleanField(
+        verbose_name='активна',
+        default=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
