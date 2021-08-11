@@ -1,12 +1,28 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test
+from django.urls import reverse
 
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
+from authapp.forms import ShopUserRegisterForm
+from adminapp.forms import ShopUserAdminEditForm
 
 
 def create_user(request):
-    pass
+    title = 'users/create'
+
+    if request.method == "POST":
+        user_form = ShopUserRegisterForm(request.POST, request.FILES)
+        if user_form.is_valid():
+            user_form.save()
+            return HttpResponseRedirect(reverse('admin:users'))
+
+    user_form = ShopUserRegisterForm()
+    context = {
+        'title': title,
+        'update_form': user_form,
+    }
+    return render(request, 'adminapp/update_user.html', context)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -20,18 +36,46 @@ def get_users(request):
     return render(request, 'adminapp/users.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def update_user(request, pk):
-    pass
+    title = 'users/update'
+    edit_user = get_object_or_404(ShopUser, pk=pk)
+    if request.method == 'POST':
+        edit_form = ShopUserAdminEditForm(request.POST, request.FILES, instance=[edit_user.pk])
+        if edit_form.is_valid:
+            edit_form.save()
+            return HttpResponseRedirect(reverse('admin:update_user', args=[edit_user.pk]))
+
+    edit_form = ShopUserAdminEditForm(instance=edit_user)
+    context = {
+        'title': title,
+        'update_form': edit_form,
+    }
+    return render(request, 'adminapp/update_user.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def delete_user(request, pk):
-    pass
+    title = 'users/delete'
+    user_to_delete = get_object_or_404(ShopUser, pk=pk)
+    if request.method == 'POST':
+        user_to_delete.is_active = False
+        user_to_delete.save()
+        return HttpResponseRedirect(reverse('admin:users'))
+
+    context = {
+        'title': title,
+        'user_to_delete': user_to_delete,
+    }
+    return render(request, 'adminapp/delete_user.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def create_category(request):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def get_categories(request):
     title = 'admin panel/categories'
     categories = ProductCategory.objects.all()
@@ -42,22 +86,27 @@ def get_categories(request):
     return render(request, 'adminapp/categories.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def update_category(request, pk):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def delete_category(request, pk):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def create_product(request, pk):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def get_product(request, pk):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def get_products_by_category(request, pk):
     title = 'admin panel/products'
     category = get_object_or_404(ProductCategory, pk=pk)
@@ -70,9 +119,11 @@ def get_products_by_category(request, pk):
     return render(request, 'adminapp/products.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def update_product(request, pk):
     pass
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def delete_product(request, pk):
     pass
