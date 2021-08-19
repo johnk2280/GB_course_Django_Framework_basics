@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 import mainapp.views
+
 from my_geek_shop.views import render_index, render_contacts, render_prod_description, render_hot_deal
 
 urlpatterns = [
