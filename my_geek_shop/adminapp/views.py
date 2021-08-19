@@ -123,7 +123,7 @@ def get_product(request, pk):
         'title': title,
         'object': product,
     }
-    return render(request, 'adminapp/product_description, content')
+    return render(request, 'adminapp/product_description', context)
 
 
 @user_passes_test(lambda u: u.is_superuser)
