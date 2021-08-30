@@ -2,38 +2,67 @@
 {% load static %}
 
 {% block content %}
-  <div class="products_list">
-    <button class="new_product">
-      <a href="{% url 'admin:create_product' category.pk %}"> new product </a>
-    </button>
-		
-    {% for object in objects %}
-      <div class="product_record">
-        <img src="/media/{{object.image|default:'products_images/default.jpg'}}" alt="{{ object.name }}">
-        <div class="product_name">
-          {{ object.name|title }}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Products of {{ category.name }}</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Products
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Short description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Short description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for product in objects %}
+                        <tr>
+                            <td  width="70" height="70"><img src="/media/products_images/{{ product.img }}" alt="{{ product.name}}" width="70" height="70"></td>
+                            <td> <a href="{% url 'admin:product' product.pk %}" style="color: dodgerblue">{{ product.name }}</a></td>
+                            <td> {{ product.short_description }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>
+                                <button>
+                                    <a href="{% url 'admin:update_product' product.pk %}"> edit </a>
+                                </button>
+                                <button>
+                                    <a href="{% url 'admin:delete_product' product.pk %}"> delete </a>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'admin:create_product' category.pk %}">
+                    <button class="btn btn-success">Create product</button>
+                </a>
+            </div>
         </div>
-        <div class="product_actions">
-          <button>
-            <a href="{% url 'admin:product' object.pk %}"> more details </a>
-          </button>
-          <button>
-            <a href="{% url 'admin:update_product' object.pk %}"> edit </a>
-          </button>
-          <button>
-            <a href="{% url 'admin:delete_product' object.pk %}"> delete </a>
-          </button>
-        </div>
-        <div class="summary">
-          <b>price</b>
-          <p>{{ object.price }} руб</p>
-          <b>quantity</b>
-          <p>{{ object.quantity }}</p>
-        </div>
-        <div class="product_desc">
-          {{ object.short_desc|title }}
-        </div>
-      </div>
-    {% endfor%}
-  </div>
+    </div>
+</main>
+
 {% endblock %}

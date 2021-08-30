@@ -8,6 +8,7 @@ from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def create_user(request):
     title = 'users/create'
 
@@ -41,10 +42,10 @@ def update_user(request, pk):
     title = 'users/update'
     edit_user = get_object_or_404(ShopUser, pk=pk)
     if request.method == 'POST':
-        edit_form = ShopUserAdminEditForm(request.POST, request.FILES, instance=[edit_user.pk])
+        edit_form = ShopUserAdminEditForm(request.POST, request.FILES, instance=edit_user)
         if edit_form.is_valid:
             edit_form.save()
-            return HttpResponseRedirect(reverse('admin:update_user', args=[edit_user.pk]))
+            return HttpResponseRedirect(reverse('admin:users'))
 
     edit_form = ShopUserAdminEditForm(instance=edit_user)
     context = {
@@ -60,6 +61,7 @@ def delete_user(request, pk):
     user_to_delete = get_object_or_404(ShopUser, pk=pk)
     if request.method == 'POST':
         user_to_delete.is_active = False
+        user_to_delete.is_deleted = True
         user_to_delete.save()
         return HttpResponseRedirect(reverse('admin:users'))
 

@@ -2,12 +2,48 @@
 {% load static %}
 
 {% block content %}
-  <form class="form-horizontal" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ update_form.as_p }}
-    <input class="form-control" type="submit" value="save">
-  </form>
-  <button class="btn btn-round form-control last">
-    <a href="{% url 'admin:users' %}"> to the list of users  </a>
-  </button>
+<!--<main>-->
+<!--    <form class="form-horizontal" method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        {{ update_form.as_p }}-->
+<!--        <input class="form-control" type="submit" value="save">-->
+<!--    </form>-->
+<!--    <button class="btn btn-round form-control last">-->
+<!--        <a href="{% url 'admin:users' %}"> to the list of users </a>-->
+<!--    </button>-->
+<!--</main>-->
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Users</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Creation
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ update_form.as_p }}
+                    <input class="form-control" type="submit" value="save">
+                </form>
+
+<!--                {% if user %}-->
+<!--                    <button class="btn btn-round form-control last">-->
+<!--                        <a href="{% url 'admin:delete_user' user.pk %}"> delete </a>-->
+<!--                    </button>-->
+<!--                {% endif %}-->
+
+                <button class="btn btn-round form-control last">
+                    <a href="{% url 'admin:users' %}"> to the list of users </a>
+                </button>
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
 {% endblock %}
+

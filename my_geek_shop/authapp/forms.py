@@ -33,7 +33,6 @@ class ShopUserRegisterForm(UserCreationForm):
         super(ShopUserRegisterForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
-            field.help_text = ''
 
     def clean_age(self):
         age = self.cleaned_data['age']

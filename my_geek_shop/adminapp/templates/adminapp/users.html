@@ -21,6 +21,7 @@
                             <th>E-mail</th>
                             <th>Is staff</th>
                             <th>Is active</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -31,37 +32,46 @@
                             <th>E-mail</th>
                             <th>Is staff</th>
                             <th>Is active</th>
+                            <th></th>
                         </tr>
                         </tfoot>
                         <tbody>
                         {% for user in objects %}
-                            <tr>
-                                <td><a href="{#% url 'admin:update_user' user.id %#}" style="color: dodgerblue">{{ user.username }}</a></td>
-                                <td>{{ user.first_name }}</td>
-                                <td>{{ user.last_name }}</td>
-                                <td>{{ user.email }}</td>
-                                <td class="text-center">
-                                    {% if user.is_staff %}
-                                        <i class="fa fa-check-circle"></i>
-                                    {% else %}
-                                        <i class="fa fa-times-circle"></i>
-                                    {% endif %}
-                                </td>
-                                <td class="text-center">
-                                    {% if user.is_active %}
-                                        <i class="fa fa-check-circle"></i>
-                                    {% else %}
-                                        <i class="fa fa-times-circle"></i>
-                                    {% endif %}
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><a href="{#% url 'admin:update_user' user.pk %#}" style="color: dodgerblue">{{ user.username }}</a></td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if user.is_staff %}
+                                    <i class="fa fa-check-circle"></i>
+                                {% else %}
+                                    <i class="fa fa-times-circle"></i>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if user.is_active %}
+                                    <i class="fa fa-check-circle"></i>
+                                {% else %}
+                                    <i class="fa fa-times-circle"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button >
+                                    <a href="{% url 'admin:update_user' user.pk %}"> edit </a>
+                                </button>
+                                <button>
+                                    <a href="{% url 'admin:delete_user' user.pk %}"> delete </a>
+                                </button>
+                            </td>
+                        </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="card-footer">
-                <a href="{% url 'adminapp:create_user' %}">
+                <a href="{% url 'admin:create_user' %}">
                     <button class="btn btn-success">Create user</button>
                 </a>
             </div>
