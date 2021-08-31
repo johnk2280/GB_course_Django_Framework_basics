@@ -204,7 +204,7 @@ def delete_product(request, pk):
     title = 'product/delete'
     product_to_delete = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
-        product_to_delete.is_active = True
+        product_to_delete.is_active = False
         product_to_delete.save()
         return HttpResponseRedirect(reverse('admin:products', args=[product_to_delete.category.pk]))
 

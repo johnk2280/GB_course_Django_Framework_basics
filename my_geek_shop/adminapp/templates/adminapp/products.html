@@ -36,7 +36,7 @@
                         </tfoot>
                         <tbody>
                         {% for product in objects %}
-                        <tr>
+                        <tr style="{% if not product.is_active %} opacity: .5; {% endif %}">
                             <td  width="70" height="70"><img src="/media/products_images/{{ product.img }}" alt="{{ product.name}}" width="70" height="70"></td>
                             <td> <a href="{% url 'admin:product' product.pk %}" style="color: dodgerblue">{{ product.name }}</a></td>
                             <td> {{ product.short_description }}</td>

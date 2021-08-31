@@ -4,6 +4,7 @@ import csv
 from random import shuffle, sample
 
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product, ProductsFile
@@ -82,13 +83,22 @@ def get_page_content(page_name, user):
     }
 
 
-def render_products(request, pk=None):
+def render_products(request, pk=None, page=1):
     add_products_from_files()
     context = get_page_content(page_name='products', user=request.user)
     products = get_products_from_db_by(pk)
     shuffle(products)
 
+    paginator = Paginator(products, 3)
+    try:
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
+
     context['category'] = get_products_category(pk)
-    context['products'] = products[:12]
+    # context['products'] = products[:12]
+    context['products'] = products_paginator
 
     return render(request, 'mainapp/products.html', context)
