@@ -5,7 +5,7 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Users</h1>
+        <h1 class="mt-4">Product</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
@@ -18,7 +18,7 @@
                     <input class="form-control" type="submit" value="save">
                 </form>
                 <button class="btn btn-round form-control last">
-                    <a href="{% url 'admin:users' %}"> to the list of users </a>
+                    <a href="{% url 'admin:products' category.pk %}"> to the list of products </a>
                 </button>
 
 
@@ -29,4 +29,3 @@
 </main>
 
 {% endblock %}
-
