@@ -47,10 +47,6 @@ def add_products_from_files():
             file.save()
 
 
-def get_basket(user):
-    return list(Basket.objects.filter(user=user)) if user.is_authenticated else []
-
-
 def get_products_from_db_by(pk):
     if pk and pk != 0:
         return list(Product.objects.filter(category__pk=pk).order_by('-quantity'))
@@ -77,7 +73,6 @@ def get_page_content(page_name, user):
         'title': data[page_name]['title'],
         'text': data[page_name]['text'],
         'menu_links': get_categories(),
-        'basket': get_basket(user),
         'hot_product': hot_product,
         'same_products': get_same_products(hot_product),
     }

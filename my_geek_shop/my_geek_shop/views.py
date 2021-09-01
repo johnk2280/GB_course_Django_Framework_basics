@@ -19,15 +19,6 @@ def load_from_json(file):
         return json.load(f)
 
 
-# def get_page_data(page_name):
-#     data = load_from_json('context.json')
-#     return {
-#         'title': data[page_name]['title'],
-#         'text': data[page_name]['text'],
-#         'menu_links': get_categories(),
-#     }
-
-
 def render_index(request):
     context = get_page_content(page_name='contacts', user=request.user)
     context['products'] = Product.objects.all()[:4]

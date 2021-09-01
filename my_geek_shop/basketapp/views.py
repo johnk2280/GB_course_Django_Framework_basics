@@ -56,10 +56,6 @@ def remove_product_from_basket(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def get_basket_content():
-    pass
-
-
 @login_required
 def render_basket(request):
     title = 'Корзина'
