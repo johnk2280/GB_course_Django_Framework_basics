@@ -89,16 +89,19 @@ def render_products(request, pk=None, page=1):
     products = get_products_from_db_by(pk)
     shuffle(products)
 
-    paginator = Paginator(products, 3)
-    try:
-        products_paginator = paginator.page(page)
-    except PageNotAnInteger:
-        products_paginator = paginator.page(1)
-    except EmptyPage:
-        products_paginator = paginator.page(paginator.num_pages)
+    # TODO: Пагинатор на вкладке products довести до ума.
+    #  Сайт падает при выборе всех категорий.
+
+    # paginator = Paginator(products, 3)
+    # try:
+    #     products_paginator = paginator.page(page)
+    # except PageNotAnInteger:
+    #     products_paginator = paginator.page(1)
+    # except EmptyPage:
+    #     products_paginator = paginator.page(paginator.num_pages)
 
     context['category'] = get_products_category(pk)
-    # context['products'] = products[:12]
-    context['products'] = products_paginator
+    context['products'] = products[:12]
+    # context['products'] = products_paginator
 
     return render(request, 'mainapp/products.html', context)

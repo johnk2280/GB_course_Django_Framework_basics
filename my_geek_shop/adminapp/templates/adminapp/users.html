@@ -4,11 +4,11 @@
 {% block content %}
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Users</h1>
+        <h1 class="mt-4">{{ header }}</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                Users
+                {{ table_header }}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -36,7 +36,7 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        {% for user in objects %}
+                        {% for user in object_list %}
                         <tr style="{% if not user.is_active %} opacity: .5; {% endif %}">
                             <td><a href="{#% url 'admin:update_user' user.pk %#}" style="color: dodgerblue">{{ user.username }}</a></td>
                             <td>{{ user.first_name }}</td>
