@@ -31,7 +31,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
 
     user_profile_data = response.json()['response'][0]
     if user_profile_data['sex']:
-        user.shopuserprofile.gender = ShopUserProfile.MALE if user_profile_data == 2 else ShopUserProfile.FEMALE
+        user.shopuserprofile.gender = ShopUserProfile.MALE if user_profile_data['sex'] == 2 else ShopUserProfile.FEMALE
 
     if user_profile_data['about']:
         user.shopuserprofile.about_me = user_profile_data['about']
