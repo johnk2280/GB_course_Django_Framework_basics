@@ -3,8 +3,9 @@ import hashlib
 
 from django.contrib.auth import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.forms import ModelForm
 
-from .models import ShopUser
+from .models import ShopUser, ShopUserProfile
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -79,3 +80,18 @@ class ShopUserEditForm(UserChangeForm):
             raise forms.ValidationError('You are too young')
 
         return age
+
+
+class ShopUserProfileEditForm(ModelForm):
+    class Meta:
+        model = ShopUserProfile
+        fields = (
+            'tagline',
+            'about_me',
+            'gender',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(ShopUserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'

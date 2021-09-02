@@ -25,6 +25,7 @@ from my_geek_shop.views import render_index, render_contacts, render_prod_descri
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', render_index, name='index'),
+    path('', include('social_django.urls', namespace='social'), name='social'),
     path('contacts/', render_contacts, name='contacts'),
     path('prod_description/<int:pk>', render_prod_description, name='prod_description'),
     path('hot_deal/', render_hot_deal, name='hot_deal'),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('auth/', include('authapp.urls', namespace='auth'), name='auth'),
     path('basket/', include('basketapp.urls', namespace='basket'), name='basket'),
     path('admin/', include('adminapp.urls', namespace='admin'), name='admin'),
+
 ]
 
 if settings.DEBUG:
