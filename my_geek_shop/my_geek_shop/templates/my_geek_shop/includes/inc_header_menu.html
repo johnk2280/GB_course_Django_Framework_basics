@@ -6,12 +6,13 @@
     <ul class="menu clearfix">
         <li class="menu-list"><a href="{% url 'index' %}" class="menu-link menu-link-active">HOME</a></li>
         <li class="menu-list"><a href="{% url 'products:index' %}" class="menu-link">PRODUCTS</a></li>
-        <li class="menu-list"><a href="" class="menu-link">HISTORY</a></li>
+<!--        <li class="menu-list"><a href="" class="menu-link">HISTORY</a></li>-->
         <li class="menu-list"><a href="" class="menu-link">SHOWROOM</a></li>
         <li class="menu-list"><a href="{% url 'contacts' %}" class="menu-link">CONTACT</a></li>
         {% if user.is_authenticated %}
         <li class="menu-list">
             <a href="{% url 'auth:edit' %}" class="menu-link">{{ user.username | default:'user' }}</a>
+            <a href="{% url 'ordersapp:orders_list' %}" class="menu-link">orders</a>
         </li>
         {% endif %}
         {% if user.is_superuser %}
