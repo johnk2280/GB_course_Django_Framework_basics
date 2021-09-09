@@ -9,6 +9,7 @@ from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditF
 from authapp.models import ShopUser
 
 
+
 def login(request):
     title = 'вход'
     text = 'login to the system'
