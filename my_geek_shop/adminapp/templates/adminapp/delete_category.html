@@ -1,0 +1,22 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <div class="product_delete">
+    Are you sure you want to delete {{ category_to_delete.name }}
+    {% if object.name %}
+      {{ object.name|title }}
+    {% endif %}
+    ?
+    <form action="{% url 'admin:delete_category' object.pk %}" method="post">
+      {% csrf_token %}
+      <input class="btn btn-danger" type="submit" value="delete">
+    </form>
+    <button class="btn btn-success">
+      <a href="{% url 'admin:categories' %}">
+        cancel
+      </a>
+    </button>
+  </div>
+{% endblock %}

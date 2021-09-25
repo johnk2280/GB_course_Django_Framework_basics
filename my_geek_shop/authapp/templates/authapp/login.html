@@ -1,0 +1,41 @@
+{% extends "authapp/base.html" %}
+{% load static  %}
+
+
+<body>
+
+{% block header %}
+{% include 'authapp/includes/inc_login_header.html' %}
+{% endblock%}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+    {% csrf_token %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+    {{ login_form.as_p }}
+    <br>
+    <input class="form-control" type="submit" value="SUBMIT">
+</form>
+<br>
+
+<button type="button" class="btn form-control btn-primary">
+    <a href="{% url 'auth:register' %}" class="">REGISTER</a>
+</button>
+
+<button class="btn btn-round form-control">
+    <a href="{% url 'auth:register' %}" class="">
+        Зарегистрироваться
+    </a>
+</button>
+<button class="btn btn-round form-control">
+    <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+     Вход через ВКонтакте
+    </a>
+</button>
+
+{% endblock %}
+
+</body>

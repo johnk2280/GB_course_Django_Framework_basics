@@ -1,0 +1,23 @@
+{% extends "basketapp/base.html" %}
+{% load static  %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block header_text %}{{ text|title }}{% endblock %}
+
+{% block content %}
+<div class="basket_list">
+    {% if basket_items %}
+        {% include 'basketapp/includes/inc_basket_list.html' %}
+    {% else %}
+        <h2 align="center" >Cart is empty</h2>
+    {% endif %}
+    <button class="btn btn-round" >
+        <a href="{% url 'index' %}">
+            to main
+        </a>
+    </button>
+
+</div>
+{% endblock %}
+

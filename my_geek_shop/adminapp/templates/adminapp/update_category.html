@@ -1,0 +1,31 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">{{ header|title }}</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                {{ table_header|title }}
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="form-control" type="submit" value="save">
+                </form>
+                <button class="btn btn-round form-control last">
+                    <a href="{% url 'admin:categories' %}"> to the list of categories </a>
+                </button>
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}

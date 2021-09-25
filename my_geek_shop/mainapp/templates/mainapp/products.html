@@ -1,0 +1,69 @@
+{% extends "my_geek_shop/base.html" %}
+{% load static  %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block header_text %}{{ text|title }}{% endblock %}
+
+{% block content %}
+<div class="main-products">
+
+    <ul class="menu-products-header">
+        {% include 'my_geek_shop/includes/inc_category_menu.html' %}
+    </ul>
+
+    <div class="block-products">
+
+        {% for product in products %}
+        <div class="element-products">
+            <a href="{% url 'prod_description' product.pk  %}">
+                <img src="/media/products_images/{{ product.img }}" alt="{{ product.name }}" width="370" height="370">
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="paginator">
+        {% if products.has_previous %}
+        <a href="{% url 'products:page' category.pk products.previous_page_number %}">
+            <
+        </a>
+        {% endif %}
+        <span class="current">
+            страница {{ products.number }} из
+            {{ products.paginator.num_pages }}
+          </span>
+        {% if products.has_next %}
+        <a href="{% url 'products:page' category.pk products.next_page_number %}">
+            >
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="update-arrow">
+        <a href="#"><img src="/static/my_geek_shop/img/update-arrow.jpg" alt=""></a>
+    </div>
+
+</div>
+<div class="block2-products">
+    <div class="promo promo-1">
+        <div class="Block2-text">
+            <p class="Block2-exclusive">exclusive</p>
+            <h2 class="Block2-Fishnet-Chair">Fishnet Chair</h2>
+            <p class="Block2-content">Seat and back with upholstery made of cold cure foam. Steel frame, available
+                in matt</p>
+            <a href="{% url 'hot_deal' %}" class="button button-Block2">Order Us</a>
+        </div>
+    </div>
+    <div class="promo promo-2">
+        <div class="Block2-text">
+            <p class="Block2-exclusive">exclusive</p>
+            <h2 class="Block2-Fishnet-Chair">Fishnet Chair</h2>
+            <p class="Block2-content">Seat and back with upholstery made of cold cure foam. Steel frame, available
+                in matt</p>
+            <a href="{% url 'hot_deal' %}" class="button button-Block2">Order Us</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "authapp/base.html" %}
+{% load static  %}
+
+{% block header %}
+{% include 'authapp/includes/inc_login_header.html' %}
+{% endblock%}
+
+{% block content %}
+<div class="row">
+    <div class="col-3">
+        <div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+        <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            {{ profile_form.as_p }}
+            <br>
+            <input class="form-control btn-primary" type="submit" value="SAVE">
+        </form>
+        <button class="btn btn-round form-control last">
+            <a href="{% url 'index' %}" class="">TO MAIN</a>
+        </button>
+
+    </div>
+</div>
+{% endblock %}

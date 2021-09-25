@@ -1,0 +1,81 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">{{ header }}</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                {{ table_header }}
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>E-mail</th>
+                            <th>Is staff</th>
+                            <th>Is active</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Username</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>E-mail</th>
+                            <th>Is staff</th>
+                            <th>Is active</th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for user in object_list %}
+                        <tr style="{% if not user.is_active %} opacity: .5; {% endif %}">
+                            <td><a href="{#% url 'admin:update_user' user.pk %#}" style="color: dodgerblue">{{ user.username }}</a></td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if user.is_staff %}
+                                    <i class="fa fa-check-circle"></i>
+                                {% else %}
+                                    <i class="fa fa-times-circle"></i>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if user.is_active %}
+                                    <i class="fa fa-check-circle"></i>
+                                {% else %}
+                                    <i class="fa fa-times-circle"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button >
+                                    <a href="{% url 'admin:update_user' user.pk %}"> edit </a>
+                                </button>
+                                <button>
+                                    <a href="{% url 'admin:delete_user' user.pk %}"> delete </a>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'admin:create_user' %}">
+                    <button class="btn btn-success">Create user</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
