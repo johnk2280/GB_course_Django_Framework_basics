@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
@@ -12,6 +12,7 @@ from django.dispatch import receiver
 from basketapp.models import Basket
 from ordersapp.models import Order, OrderItem
 from ordersapp.forms import OrderItemForm
+from mainapp.models import Product
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -166,3 +167,9 @@ def product_quantity_update_after_save(sender, update_fields, instance, **kwargs
 def product_quantity_update_after_delete(sender, instance, **kwargs):
     instance.product.quantity += instance.quantity
     instance.product.save()
+
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product = Product.objects.filter(pk=int(pk)).first()
+        return JsonResponse({'price': product.price}) if product else JsonResponse({'price': 0})

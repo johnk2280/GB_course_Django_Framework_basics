@@ -72,6 +72,10 @@ class Product(models.Model):
         verbose_name = 'product'
         verbose_name_plural = 'products'
 
+    @staticmethod
+    def get_items():
+        return Product.objects.filter(is_active=True).order_by('category', 'name')
+
 
 class ProductsFile(models.Model):
     name = models.CharField(
