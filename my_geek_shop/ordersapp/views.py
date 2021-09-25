@@ -100,7 +100,7 @@ class OrderItemsUpdateView(LoginRequiredMixin, UpdateView):
             formset = OrderFormSet(instance=self.object)
             for form in formset.forms:
                 if form.instance.pk:
-                    form.initial['price'] = form.instance.producr.price
+                    form.initial['price'] = form.instance.product.price
 
             data['order_items'] = formset
 
