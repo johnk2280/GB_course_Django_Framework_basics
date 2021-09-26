@@ -1,0 +1,12 @@
+http://89.108.70.23/
+http://89.108.70.23/auth/edit/
+http://89.108.70.23/basket/
+http://89.108.70.23/basket/add/10/
+http://89.108.70.23/contacts/
+http://89.108.70.23/hot_deal/
+http://89.108.70.23/order/
+http://89.108.70.23/order/update/2/
+http://89.108.70.23/prod_description/1/
+http://89.108.70.23/products/
+http://89.108.70.23/products/category/2/
+
