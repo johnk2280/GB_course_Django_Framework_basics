@@ -3,7 +3,7 @@ from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
 from mainapp.views import get_page_content, get_same_products
 
-from my_geek_shop.settings import STATICFILES_DIRS
+from my_geek_shop.settings import STATIC_ROOT
 
 import json
 import os
@@ -14,7 +14,7 @@ def get_categories():
 
 
 def load_from_json(file):
-    file_path = os.path.join(STATICFILES_DIRS[0], 'my_geek_shop', file)
+    file_path = os.path.join(STATIC_ROOT, 'my_geek_shop', file)
     with open('my_geek_shop/static/my_geek_shop/context.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
