@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product, ProductsFile
-from my_geek_shop.settings import STATICFILES_DIRS
+from my_geek_shop.settings import STATIC_ROOT
 
 
 def get_categories():
@@ -16,7 +16,7 @@ def get_categories():
 
 
 def load_from_json(file):
-    file_path = os.path.join(STATICFILES_DIRS[0], 'my_geek_shop', file)
+    file_path = os.path.join(STATIC_ROOT, 'my_geek_shop', file)
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 

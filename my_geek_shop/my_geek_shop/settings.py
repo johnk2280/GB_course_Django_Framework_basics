@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,7 +123,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'my_geek_shop',
-        'USER': 'django',
+        'USER': 'johnk',
         'PASSWORD': 'geekbrains',
         'HOST': 'localhost'
     }
@@ -164,9 +164,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'my_geek_shop', 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'my_geek_shop', 'static'),
+# )
+STATIC_ROOT = os.path.join(BASE_DIR, 'my_geek_shop', 'static')
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
